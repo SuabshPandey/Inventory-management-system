@@ -42,8 +42,6 @@ export class MainLayout {
 
   private getChildTitle(route: ActivatedRoute): string {
     let child = route.firstChild;
-    console.log('Child', child);
-    console.log('Child snapshot', child?.snapshot);
 
     console.log('first child', child?.firstChild);
 
