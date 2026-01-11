@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 
 @Component({
   selector: 'app-error-page',
@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './error-page.scss',
 })
 export class ErrorPage {
-
+  @Input() status = signal<string>('Error');
+  @Input() message = signal<string>('Something went wrong');
 }
