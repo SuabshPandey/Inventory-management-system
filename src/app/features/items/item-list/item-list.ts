@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ItemService } from '../../../core/services/item.service';
 import { CommonModule } from '@angular/common';
 import { Loader } from '../../../shared/components/loader/loader';
@@ -8,11 +8,11 @@ import { Table } from '../../../shared/components/table/table';
 
 @Component({
   selector: 'app-item-list',
-  imports: [CommonModule,Table, Loader],
+  imports: [CommonModule, Table, Loader],
   templateUrl: './item-list.html',
   styleUrl: './item-list.scss',
 })
-export class ItemList {
+export class ItemList implements OnInit {
   private itemService = inject(ItemService);
   private router = inject(Router);
 
@@ -37,10 +37,16 @@ export class ItemList {
     },
   ];
 
+  ngOnInit(): void {
+    this.loadItems();
+  }
+
   loadItems() {
     this.loading.set(true);
     this.itemService.getItems().subscribe({
-      next: (items) => this.items.set(items),
+      next: (items) => {
+        this.items.set(items);
+      },
       complete: () => this.loading.set(false),
     });
   }
@@ -50,7 +56,7 @@ export class ItemList {
   }
 
   editItem(item: Item) {
-    this.router.navigate(['/items/edit', item.id]);
+    this.router.navigate(['/items/view', item.id]);
   }
 
   deleteItem(id: number) {
