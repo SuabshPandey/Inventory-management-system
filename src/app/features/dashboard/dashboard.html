@@ -1,3 +1,11 @@
-<p>dashboard works!</p>
 <app-loader [loading]="loading" message="Loading dashboard..."></app-loader>
-<app-error-page [status]="status" [message]="errorMessage"></app-error-page>
+<!-- <app-error-page [status]="status" [message]="errorMessage"></app-error-page> -->
+
+<h2 class="text-xl font-semibold mb-4">Dashboard Table Test</h2>
+
+<app-table
+  [columns]="columns"
+  [data]="tableData"
+  [loading]="loading"
+  [actions]="actions"
+></app-table>
