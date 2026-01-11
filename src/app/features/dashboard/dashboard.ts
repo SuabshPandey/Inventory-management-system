@@ -8,5 +8,5 @@ import { Loader } from '../../shared/components/loader/loader';
   styleUrl: './dashboard.scss',
 })
 export class Dashboard {
-  loading = signal(true);
+  loading = signal(false);
 }
