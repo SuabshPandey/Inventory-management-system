@@ -1,0 +1,38 @@
+<div class="relative w-full">
+  <table class="min-w-full border border-gray-200 rounded overflow-hidden">
+    <thead class="bg-gray-50">
+      <tr>
+        @for (col of columns; track $index) {
+        <th class="px-4 py-2 text-left text-gray-700 font-medium">
+          {{ col.header }}
+        </th>
+        } @if (actions.length > 0) {
+        <th class="px-4 py-2 text-left text-gray-700 font-medium">Actions</th>
+        }
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (row of data(); track $index) {
+      <tr>
+        @for (col of columns; track $index) {
+        <td class="px-4 py-2 border-t border-gray-200">
+          {{ row[col.field] }}
+        </td>
+        } @if (actions.length > 0) {
+        <td class="px-4 py-2 border-t border-gray-200 space-x-2">
+          @for (action of actions; track $index) {
+          <button
+            class="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 transition"
+            (click)="action.callback(row)"
+          >
+            {{ action.name }}
+          </button>
+          }
+        </td>
+        }
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
