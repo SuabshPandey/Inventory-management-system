@@ -1,6 +1,6 @@
-<div class="user-list relative">
-  <app-loader [loading]="loading" message="Loading users..."></app-loader>
-  <div class="flex items-center justify-between mb-4">
+<app-loader [loading]="loading" message="Loading users..."></app-loader>
+<div class="bg-white shadow rounded p-4">
+  <div class="flex justify-between items-center mb-4">
     <h2 class="text-lg font-semibold mb-4">Users</h2>
     <button (click)="addUser()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
       Add User
