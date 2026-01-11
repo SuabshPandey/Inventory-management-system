@@ -1,0 +1,13 @@
+<div class="user-list relative">
+  <app-loader [loading]="loading" message="Loading users..."></app-loader>
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-lg font-semibold mb-4">Users</h2>
+    <button (click)="addUser()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+      Add User
+    </button>
+  </div>
+
+  @if (!loading()) {
+  <app-table [data]="users" [columns]="columns" [actions]="actions"> </app-table>
+  }
+</div>
