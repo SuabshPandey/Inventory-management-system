@@ -1,32 +1,13 @@
-<div class="user-list">
-  <h2>Users</h2>
+<div class="user-list relative">
+  <app-loader [loading]="loading" message="Loading users..."></app-loader>
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-lg font-semibold mb-4">Users</h2>
+    <button (click)="addUser()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+      Add User
+    </button>
+  </div>
 
-  <!-- Loading spinner -->
-  @if (loading()) {
-  <div>Loading...</div>
+  @if (!loading()) {
+  <app-table [data]="users" [columns]="columns" [actions]="actions"> </app-table>
   }
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (user of users(); track $index) {
-      <tr>
-        <td>{{ user.id }}</td>
-        <td>{{ user.name }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.role }}</td>
-        <td>
-          <button (click)="deleteUser(user.id)">Delete</button>
-        </td>
-      </tr>
-      }
-    </tbody>
-  </table>
 </div>

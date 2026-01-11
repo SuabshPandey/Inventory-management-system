@@ -5,7 +5,7 @@ import { Table } from '../../shared/components/table/table';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [Loader, ErrorPage, Table],
+  imports: [],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
