@@ -1,6 +1,6 @@
 export type UserRole = 'Admin' | 'Supervisor' | 'Salesperson';
 
 export interface AuthState {
-  role: UserRole;
+  role: UserRole | null;
   isAuthenticated: boolean;
 }
