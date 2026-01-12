@@ -1,0 +1,14 @@
+<app-loader [loading]="loading" message="Loading roles..."></app-loader>
+
+<div class="bg-white shadow rounded p-4">
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-lg font-semibold">Roles</h2>
+    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" (click)="addRole()">
+      Add Role
+    </button>
+  </div>
+
+  @if (!loading()) {
+    <app-table [columns]="columns" [data]="roles()" [actions]="actions"></app-table>
+  }
+</div>
