@@ -1,10 +1,18 @@
 import { Routes } from '@angular/router';
 import { MainLayout } from './layouts/main-layout/main-layout';
+import { SignIn } from './features/auth/sign-in/sign-in';
+import { authGuard } from './core/guards/auth-guard';
 
 export const routes: Routes = [
   {
+    path: 'sign-in',
+    loadComponent: () => import('./features/auth/sign-in/sign-in').then((m) => m.SignIn),
+    title: 'Sign In',
+  },
+  {
     path: '',
     component: MainLayout,
+    canActivate: [authGuard],
     children: [
       {
         path: '',
@@ -125,6 +133,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'dashboard',
+    redirectTo: 'sign-in',
   },
 ];
