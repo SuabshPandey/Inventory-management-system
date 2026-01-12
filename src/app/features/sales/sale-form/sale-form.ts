@@ -46,10 +46,13 @@ export class SaleForm implements OnInit {
 
     const { itemId, quantity } = this.form.value;
 
+    if (itemId == null || quantity == null) return;
+
     this.loading.set(true);
     this.error.set(null);
 
-    this.saleService.sellItem(itemId!, quantity!, this.currentRole).subscribe({
+    // Convert itemId to number before passing
+    this.saleService.sellItem(+itemId, quantity, this.currentRole).subscribe({
       next: () => {
         this.router.navigate(['/sales']);
       },
@@ -63,5 +66,9 @@ export class SaleForm implements OnInit {
 
   onCancel() {
     this.form.reset();
+  }
+
+  goBack() {
+    this.router.navigate(['/sales']);
   }
 }

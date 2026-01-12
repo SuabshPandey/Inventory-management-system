@@ -1,7 +1,12 @@
 <app-loader [loading]="loading" message="Processing sale..."></app-loader>
 
-<div class="max-w-md mx-auto bg-white shadow rounded p-6">
-  <h2 class="text-lg font-semibold mb-4">Sell Item</h2>
+<div class="bg-white shadow rounded p-6">
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-lg font-semibold mb-4">Sell Item</h2>
+    <button (click)="goBack()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+      Back
+    </button>
+  </div>
 
   @if (error()) {
   <div class="mb-3 text-red-600 text-sm">
