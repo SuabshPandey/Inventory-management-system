@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import {
   ActivatedRoute,
   NavigationEnd,
@@ -8,6 +8,7 @@ import {
   RouterLinkActive,
 } from '@angular/router';
 import { filter, map } from 'rxjs';
+import { AuthService } from '../../core/services/auth.service';
 
 interface MenuItem {
   label: string;
@@ -32,6 +33,10 @@ export class MainLayout {
 
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  private authService = inject(AuthService);
+
+  currentRole = computed(() => this.authService.getCurrentRole());
+
   constructor() {
     this.router.events
       .pipe(
@@ -47,5 +52,10 @@ export class MainLayout {
       child = child.firstChild;
     }
     return child?.snapshot.data['title'] ?? 'Inventory Management System';
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/sign-in']);
   }
 }
