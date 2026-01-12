@@ -1,0 +1,12 @@
+<app-loader [loading]="loading" message="Loading sales..."></app-loader>
+
+<div class="bg-white shadow rounded p-4">
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-lg font-semibold">Sales</h2>
+    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" (click)="addSale()">
+      Add Sale
+    </button>
+  </div>
+
+  <app-table [columns]="columns" [data]="sales()" [actions]="actions"> </app-table>
+</div>

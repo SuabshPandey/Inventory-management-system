@@ -42,6 +42,31 @@ export class ItemService {
     return of(true).pipe(this.withLatency());
   }
 
+  restockItem(id: number, quantity: number): Observable<Item> {
+    const items = this.getItemFromStorage();
+    const index = items.findIndex((item) => item.id === id);
+
+    if (index === -1) {
+      throw new Error('Item not found');
+    }
+
+    if (quantity <= 0) {
+      throw new Error('Quantity must be greater than zero');
+    }
+
+    const updatedItem: Item = {
+      ...items[index],
+      stock: items[index].stock + quantity,
+    };
+
+    items[index] = updatedItem;
+    this.saveToStorage(items);
+
+    return of(updatedItem).pipe(this.withLatency());
+  }
+
+  // Helper method for localStorage interaction
+
   private getItemFromStorage(): Item[] {
     const data = localStorage.getItem(this.storageKey);
     return data ? JSON.parse(data) : [];

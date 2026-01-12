@@ -1,0 +1,50 @@
+<app-loader [loading]="loading" message="Processing sale..."></app-loader>
+
+<div class="bg-white shadow rounded p-6">
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-lg font-semibold mb-4">Sell Item</h2>
+    <button (click)="goBack()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+      Back
+    </button>
+  </div>
+
+  @if (error()) {
+  <div class="mb-3 text-red-600 text-sm">
+    {{ error() }}
+  </div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+    <!-- Item -->
+    <div>
+      <label class="block text-sm font-medium mb-1">Item</label>
+      <select formControlName="itemId" class="border rounded w-full p-2">
+        <option value="">Select item</option>
+        @for (item of items(); track item.id) {
+        <option [value]="item.id">{{ item.name }} (Stock: {{ item.stock }})</option>
+        }
+      </select>
+    </div>
+
+    <!-- Quantity -->
+    <div>
+      <label class="block text-sm font-medium mb-1">Quantity</label>
+      <input type="number" formControlName="quantity" class="border rounded w-full p-2" min="1" />
+    </div>
+
+    <!-- Actions -->
+    <div class="flex gap-2 pt-4">
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        Sell
+      </button>
+
+      <button
+        type="button"
+        (click)="onCancel()"
+        class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { ItemService } from '../../../core/services/item.service';
 import { CommonModule } from '@angular/common';
 import { Loader } from '../../../shared/components/loader/loader';
@@ -19,6 +19,8 @@ export class ItemList implements OnInit {
   items = signal<Item[]>([]);
   loading = signal<boolean>(false);
 
+  searchTerm = signal<string>('');
+
   columns = [
     { field: 'name', header: 'Name' },
     { field: 'sku', header: 'SKU' },
@@ -32,10 +34,23 @@ export class ItemList implements OnInit {
       callback: (item: Item) => this.editItem(item),
     },
     {
+      name: 'Restock',
+      callback: (item: Item) => this.restockItem(item),
+    },
+    {
       name: 'Delete',
       callback: (item: Item) => this.deleteItem(item.id),
     },
   ];
+
+  filteredItems = computed(() => {
+    const term = this.searchTerm().toLowerCase().trim();
+    if (!term) return this.items();
+
+    return this.items().filter(
+      (item) => item.name.toLowerCase().includes(term) || item.sku.toLowerCase().includes(term)
+    );
+  });
 
   ngOnInit(): void {
     this.loadItems();
@@ -57,6 +72,23 @@ export class ItemList implements OnInit {
 
   editItem(item: Item) {
     this.router.navigate(['/items/view', item.id]);
+  }
+
+  restockItem(item: Item) {
+    const quantity = Number(prompt(`Enter restock quantity for ${item.name}`));
+
+    if (!quantity || quantity <= 0) {
+      alert('Invalid quantity');
+      return;
+    }
+
+    this.loading.set(true);
+
+    this.itemService.restockItem(item.id, quantity).subscribe({
+      next: () => this.loadItems(),
+      error: (err) => alert(err.message),
+      complete: () => this.loading.set(false),
+    });
   }
 
   deleteItem(id: number) {
