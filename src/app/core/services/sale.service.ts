@@ -39,7 +39,7 @@ export class SaleService {
 
     const sales = this.getSalesFromStorage();
     const sale: Sale = {
-      id: sales.length ? Math.max(...sales.map(s => s.id)) + 1 : 1,
+      id: sales.length ? Math.max(...sales.map((s) => s.id)) + 1 : 1,
       itemId: item.id,
       itemName: item.name,
       quantity,
@@ -53,6 +53,13 @@ export class SaleService {
     this.saveSalesToStorage(sales);
 
     return of(sale).pipe(delay(this.simulateLatency()));
+  }
+
+  deleteSale(id: number): Observable<boolean> {
+    let sales = this.getSalesFromStorage();
+    sales = sales.filter((s) => s.id !== id);
+    this.saveSalesToStorage(sales);
+    return of(true);
   }
 
   //   Helper methods for localStorage interaction
