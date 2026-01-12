@@ -8,6 +8,6 @@
   </div>
 
   @if (!loading()) {
-  <app-table [data]="users" [columns]="columns" [actions]="actions"> </app-table>
+  <app-table [data]="users()" [columns]="columns" [actions]="actions"> </app-table>
   }
 </div>

@@ -11,7 +11,7 @@ export class Table {
   @Input() columns: { field: string; header: string }[] = [];
 
   // Data stored as a writable signal
-  @Input() data: WritableSignal<any[]> = signal([]);
+  @Input({ required: true }) data!: any[];
 
   // Loading state as writable signal
   @Input() loading: WritableSignal<boolean> = signal(false);
