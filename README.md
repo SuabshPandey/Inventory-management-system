@@ -1,59 +1,60 @@
-# InventoryManagementSystem
+# Inventory Management System
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.5.
+## Overview
+This is a small Angular-based inventory management system demonstrating CRUD operations, role-based access control, and dashboard metrics.
 
-## Development server
+## Features
+- Users: CRUD (Admin only)
+- Roles: CRUD (Admin only)
+- Items: CRUD, search, restock (Admin, Supervisor)
+- Sales: Sell, restock, search (Admin, Salesperson)
+- Dashboard: Total items sold, items sold today, most popular item (Admin, Supervisor)
 
-To start a local development server, run:
+## Technologies
+- Angular v21
+- SCSS + Tailwind CSS
+- localStorage for data persistence
+- Signals for reactive state management
 
-```bash
-ng serve
-```
+## How to Run
+1. Clone the repo
+2. `npm install`
+3. `ng serve`
+4. Navigate to `http://localhost:4200`
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Access Control
+- Admin: Full access
+- Supervisor: Access to items and dashboard
+- Salesperson: Access to sales only
 
-## Code scaffolding
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Technical Details
 
-```bash
-ng generate component component-name
-```
+- **Data Layer:**  
+  - All data stored in `localStorage`
+  - Services return **Observables** and simulate network latency (500–2500 ms)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- **Angular Features:**  
+  - **Signals** for reactive state
+  - **Computed signals** for derived metrics
+  - Component communication via `@Input` and `@Output`
+  - Lazy-loaded routes using `loadComponent`
+  - Route guards (`authGuard`) for role-based access
 
-```bash
-ng generate --help
-```
+- **Styling:** Tailwind CSS and SCSS. No component libraries used.
 
-## Building
+---
 
-To build the project run:
+## Architectural Note
+- The system follows MVC pattern.
+- Role-based access is enforced via Angular route guards and sidebar menu filtering.
+- **Future improvement**: For scaling, I would introduce a backend API with token-based authentication and a proper database instead of localStorage.
 
-```bash
-ng build
-```
+## Assumptions
+- localStorage simulates the backend for demonstration purposes.
+- Salesperson can only access sales; other routes are blocked via guards.
+- Metrics are computed based on sales stored in localStorage.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Author
+- **Name:** Subash Pandey
+- **Email:** itsmesubashpandey@gmail.com
