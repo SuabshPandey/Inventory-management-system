@@ -5,7 +5,7 @@
       Inventory System
     </div>
     <nav class="p-4 space-y-1">
-      @for (item of menuItems(); track item.path) {
+      @for (item of visibleMenuItems(); track item.path) {
       <a
         [routerLink]="item.path"
         routerLinkActive="bg-gray-200 font-medium"

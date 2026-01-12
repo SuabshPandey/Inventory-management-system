@@ -13,6 +13,7 @@ import { AuthService } from '../../core/services/auth.service';
 interface MenuItem {
   label: string;
   path: string;
+  roles?: ('Admin' | 'Supervisor' | 'Salesperson')[];
 }
 
 @Component({
@@ -24,11 +25,11 @@ interface MenuItem {
 export class MainLayout {
   pageTitle = signal('Dashboard');
   menuItems = signal<MenuItem[]>([
-    { label: 'Dashboard', path: '/dashboard' },
-    { label: 'Roles', path: '/roles' },
-    { label: 'Users', path: '/users' },
-    { label: 'Items', path: '/items' },
-    { label: 'Sales', path: '/sales' },
+    { label: 'Dashboard', path: '/dashboard', roles: ['Admin', 'Supervisor'] },
+    { label: 'Roles', path: '/roles', roles: ['Admin'] },
+    { label: 'Users', path: '/users', roles: ['Admin'] },
+    { label: 'Items', path: '/items', roles: ['Admin', 'Supervisor'] },
+    { label: 'Sales', path: '/sales', roles: ['Admin', 'Salesperson'] },
   ]);
 
   private router = inject(Router);
@@ -54,6 +55,10 @@ export class MainLayout {
     return child?.snapshot.data['title'] ?? 'Inventory Management System';
   }
 
+  visibleMenuItems = computed(() => {
+    const currentRole = this.authService.getCurrentRole();
+    return this.menuItems().filter((item) => !item.roles || item.roles.includes(currentRole!));
+  });
   logout() {
     this.authService.logout();
     this.router.navigate(['/sign-in']);
