@@ -1,1 +1,30 @@
-<h2 class="text-xl font-semibold mb-4">Dashboard Page</h2>
+<app-loader [loading]="loading" message="Loading dashboard..."></app-loader>
+
+<div class="p-4 space-y-4">
+  <h2 class="text-xl font-semibold mb-4">Dashboard Metrics</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <app-dashboard-card
+      title="Total Users"
+      [value]="totalUsers()"
+      description="Registered users"
+    ></app-dashboard-card>
+    <app-dashboard-card
+      title="Total Items Sold"
+      [value]="totalItemsSold()"
+      description="All-time sales"
+    ></app-dashboard-card>
+
+    <app-dashboard-card
+      title="Items Sold Today"
+      [value]="itemsSoldToday()"
+      description="Today's sales"
+    ></app-dashboard-card>
+
+    <app-dashboard-card
+      title="Most Popular Item"
+      [value]="mostPopularItem()"
+      description="Top-selling item"
+    ></app-dashboard-card>
+  </div>
+</div>
