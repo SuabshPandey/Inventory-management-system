@@ -1,0 +1,21 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="bg-white shadow rounded p-6 w-full max-w-sm">
+    <h2 class="text-xl font-semibold mb-4 text-center">Sign In</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium mb-1">Sign in as</label>
+        <select formControlName="role" class="border rounded w-full p-2">
+          <option value="">Select role</option>
+          @for (role of roles; track role) {
+          <option [value]="role">{{ role }}</option>
+          }
+        </select>
+      </div>
+
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+        Continue
+      </button>
+    </form>
+  </div>
+</div>

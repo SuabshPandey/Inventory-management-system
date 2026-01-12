@@ -20,7 +20,12 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem(this.STORAGE_KEY);
+    const authState: AuthState = {
+      role: null,
+      isAuthenticated: false,
+    };
+
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(authState));
   }
 
   getAuthState(): AuthState | null {
@@ -28,7 +33,6 @@ export class AuthService {
     return data ? JSON.parse(data) : null;
   }
 
-  
   isLoggedIn(): boolean {
     return !!this.getAuthState()?.isAuthenticated;
   }
