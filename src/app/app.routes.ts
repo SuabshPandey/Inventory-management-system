@@ -18,6 +18,32 @@ export const routes: Routes = [
         title: 'Dashboard',
       },
       {
+        path: 'roles',
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./features/roles/role-list/role-list').then((m) => m.RoleList),
+            data: { title: 'Roles' },
+            title: 'Roles',
+          },
+          {
+            path: 'add',
+            loadComponent: () =>
+              import('./features/roles/role-form/role-form').then((m) => m.RoleForm),
+            data: { title: 'Add Role' },
+            title: 'Add Role',
+          },
+          {
+            path: 'view/:id',
+            loadComponent: () =>
+              import('./features/roles/role-form/role-form').then((m) => m.RoleForm),
+            data: { title: 'View Role' },
+            title: 'View Role',
+          },
+        ],
+      },
+      {
         path: 'users',
         children: [
           {

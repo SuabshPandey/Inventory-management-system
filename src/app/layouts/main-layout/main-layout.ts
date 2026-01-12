@@ -24,6 +24,7 @@ export class MainLayout {
   pageTitle = signal('Dashboard');
   menuItems = signal<MenuItem[]>([
     { label: 'Dashboard', path: '/dashboard' },
+    { label: 'Roles', path: '/roles' },
     { label: 'Users', path: '/users' },
     { label: 'Items', path: '/items' },
     { label: 'Sales', path: '/sales' },
