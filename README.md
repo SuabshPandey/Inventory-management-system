@@ -57,4 +57,4 @@ This is a small Angular-based inventory management system demonstrating CRUD ope
 
 ## Author
 - **Name:** Subash Pandey
-- **Email:** itsmesubashpandey@gmail.com
+- **Email:** itsmesubashpandey867@gmail.com
